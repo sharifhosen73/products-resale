@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const SideHeader = () => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:5000/categories").then((res) => {
-      setCategories(res.data);
-    });
-  }, []);
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () =>
+      fetch("http://localhost:5000/categories").then((res) => res.json()),
+  });
 
   return (
     <div className="mt-28 bg-gray-300 h-96 p-3 mr-3">
