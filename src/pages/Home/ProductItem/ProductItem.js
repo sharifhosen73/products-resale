@@ -28,9 +28,6 @@ const ProductItem = ({ product }) => {
           <Link to={`/products/${_id}`} className="btn btn-primary">
             Details
           </Link>
-          <label htmlFor="my-modal-3" className="btn">
-            open modal
-          </label>
         </div>
       </div>
     </div>
