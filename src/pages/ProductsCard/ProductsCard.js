@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductItem from "../Home/ProductItem/ProductItem";
-import { useLoaderData } from "react-router-dom";
+import axios from "axios";
 
 const ProductsCard = () => {
-  const products = useLoaderData();
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/products").then((res) => {
+      setProducts(res.data);
+    });
+  }, []);
 
   console.log(products);
   return (
