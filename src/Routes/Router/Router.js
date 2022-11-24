@@ -29,6 +29,8 @@ export const router = createBrowserRouter([
       {
         path: "/product/category/:id",
         element: <CategoryProduct />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/categories/${params.id}`),
       },
     ],
   },

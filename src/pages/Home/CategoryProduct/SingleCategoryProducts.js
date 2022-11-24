@@ -1,8 +1,6 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 
-const SingleProductDetails = () => {
-  const product = useLoaderData();
+const SingleCategoryProducts = ({ category }) => {
   const {
     name,
     image_url,
@@ -11,12 +9,12 @@ const SingleProductDetails = () => {
     details,
     used,
     seller_name,
-    location,
-  } = product;
+  } = category;
   return (
-    <div className="w-4/5 mx-auto my-10">
-      <img src={image_url} alt="Shoes" className="rounded-xl h-96 w-full" />
-
+    <div>
+      <figure className="px-10 pt-10">
+        <img src={image_url} alt="Shoes" className="rounded-xl" />
+      </figure>
       <div className="card-body ">
         <h2 className="card-title">{name}</h2>
         <p className="text-xl font-semibold">Price: ${original_price}</p>
@@ -25,7 +23,6 @@ const SingleProductDetails = () => {
         <p className="text-justify">{details}</p>
         <div>
           <span>Seller Name: {seller_name}</span>
-          <span>{location}</span>
         </div>
         <div className="card-actions">
           <button className="btn btn-primary">Book Now</button>
@@ -35,4 +32,4 @@ const SingleProductDetails = () => {
   );
 };
 
-export default SingleProductDetails;
+export default SingleCategoryProducts;

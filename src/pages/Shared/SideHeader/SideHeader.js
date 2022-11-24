@@ -14,6 +14,7 @@ const SideHeader = () => {
       <h1 className="text-3xl mb-8">Categories</h1>
       {categories.map((category) => (
         <Link
+          to={`/product/category/${category.id}`}
           style={{ display: "block" }}
           className="text-xl py-2"
           key={category.id}
