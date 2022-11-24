@@ -1,4 +1,5 @@
 import React from "react";
+import BookModal from "../BookModal/BookModal";
 
 const SingleCategoryProducts = ({ category }) => {
   const {
@@ -9,6 +10,7 @@ const SingleCategoryProducts = ({ category }) => {
     details,
     used,
     seller_name,
+    location,
   } = category;
   return (
     <div>
@@ -21,11 +23,21 @@ const SingleCategoryProducts = ({ category }) => {
         <p className="text-xl font-semibold">Price: ${resale_price}</p>
         <p className="text-justify">Used: {used}</p>
         <p className="text-justify">{details}</p>
-        <div>
-          <span>Seller Name: {seller_name}</span>
-        </div>
-        <div className="card-actions">
-          <button className="btn btn-primary">Book Now</button>
+        <div className="flex justify-between py-2">
+          <div>
+            <p>
+              <span>Seller Name: {seller_name}</span>
+            </p>
+            <p>
+              <span>Location: {location}</span>
+            </p>
+          </div>
+          <div className="card-actions">
+            <label htmlFor="bookingModal" className="btn">
+              Book Now
+            </label>
+          </div>
+          <BookModal />
         </div>
       </div>
     </div>

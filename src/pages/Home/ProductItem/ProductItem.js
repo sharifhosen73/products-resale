@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BookModal from "../BookModal/BookModal";
 
 const ProductItem = ({ product }) => {
   const {
@@ -28,8 +29,12 @@ const ProductItem = ({ product }) => {
           <Link to={`/products/${_id}`} className="btn btn-primary">
             Details
           </Link>
+          <label htmlFor="bookingModal" className="btn">
+            Book Now
+          </label>
         </div>
       </div>
+      <BookModal />
     </div>
   );
 };
