@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const Login = () => {
+const SignUp = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -11,7 +11,18 @@ const Login = () => {
   return (
     <div className="w-full lg:w-2/5 mx-auto lg:mt-32">
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-        <h1 className="text-4xl">Login</h1>
+        <h1 className="text-4xl">Sign Up</h1>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Name</span>
+          </label>
+          <input
+            type="name"
+            {...register("name")}
+            placeholder="name"
+            className="input input-bordered"
+          />
+        </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -40,23 +51,11 @@ const Login = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <input type="submit" value="Login" className="btn btn-primary" />
+          <input type="submit" value="Sign Up" className="btn btn-primary" />
         </div>
       </form>
     </div>
   );
 };
 
-export default Login;
-
-{
-  /* <form onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("example")} />
-
-        <input {...register("exampleRequired", { required: true })} />
-
-        {errors.exampleRequired && <span>This field is required</span>}
-
-        <input type="submit" />
-      </form> */
-}
+export default SignUp;
