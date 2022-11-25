@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider } from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
@@ -10,6 +10,7 @@ const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const [createUserEmail, setCreateUserEmail] = useState("");
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -18,6 +19,8 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success("Successfully Sign Up");
+        navigate("/");
+
         const userInfo = {
           displayName: data.name,
         };
