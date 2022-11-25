@@ -13,9 +13,9 @@ const SingleCategoryProducts = ({ category }) => {
     location,
   } = category;
   return (
-    <div>
-      <figure className="px-10 pt-10">
-        <img src={image_url} alt="Shoes" className="rounded-xl" />
+    <div className="bg-base-100 shadow-xl">
+      <figure className="w-full h-96">
+        <img src={image_url} alt="Shoes" className="rounded-xl w-full" />
       </figure>
       <div className="card-body ">
         <h2 className="card-title">{name}</h2>
@@ -37,7 +37,7 @@ const SingleCategoryProducts = ({ category }) => {
               Book Now
             </label>
           </div>
-          <BookModal />
+          <BookModal name={name} price={resale_price} />
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ const SingleProductDetails = () => {
             </label>
           </div>
         </div>
-        <BookModal />
+        <BookModal name={name} price={resale_price} />
       </div>
     </div>
   );
