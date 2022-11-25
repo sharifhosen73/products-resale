@@ -1,16 +1,46 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../contexts/AuthProvider";
+import { toast } from "react-hot-toast";
+
+const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const { login, googleLogin } = useContext(AuthContext);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = (data) => {
+    login(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        toast.success("Successfully Login");
+        navigate(from);
+        // getUserToken(user.email);
+      })
+      .catch((error) => {});
+  };
+
+  const handleGoogle = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .then((error) => console.error(error));
   };
 
   return (
     <div className="w-full lg:w-2/5 mx-auto lg:mt-32">
-      <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+      <form onSubmit={handleSubmit(handleLogin)} className="card-body">
         <h1 className="text-4xl">Login</h1>
         <div className="form-control">
           <label className="label">
@@ -43,6 +73,16 @@ const Login = () => {
           <input type="submit" value="Login" className="btn btn-primary" />
         </div>
       </form>
+      <p>
+        New User
+        <Link to="/login" className="text-primary font-semibold pl-1">
+          Create Account
+        </Link>
+      </p>
+      <div className="divider">OR</div>
+      <button onClick={handleGoogle} className="btn btn-outline w-full">
+        Sign Up With Google
+      </button>
     </div>
   );
 };

@@ -1,10 +1,14 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { GoogleAuthProvider } from "firebase/auth";
 
+const googleProvider = new GoogleAuthProvider();
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const [createUserEmail, setCreateUserEmail] = useState("");
 
   const onSubmit = (data) => {
@@ -13,7 +17,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // toast.success('Successfully Sign Up')
+        toast.success("Successfully Sign Up");
         const userInfo = {
           displayName: data.name,
         };
@@ -26,6 +30,15 @@ const SignUp = () => {
       .then((error) => {
         console.log(error);
       });
+  };
+
+  const handleGoogle = () => {
+    googleLogin(googleProvider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .then((error) => console.error(error));
   };
 
   const saveUser = (name, email) => {
@@ -84,6 +97,16 @@ const SignUp = () => {
           <input type="submit" value="Sign Up" className="btn btn-primary" />
         </div>
       </form>
+      <p>
+        Have an Account
+        <Link to="/login" className="text-primary font-semibold pl-1">
+          Please Login
+        </Link>
+      </p>
+      <div className="divider">OR</div>
+      <button onClick={handleGoogle} className="btn btn-outline w-full">
+        Sign Up With Google
+      </button>
     </div>
   );
 };
