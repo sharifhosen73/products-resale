@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import AdminRoute from "../../AdminRoute/AdminRoute";
 import Main from "../../Layout/Main";
 import Dashboard from "../../pages/Dashboard/Dashboard/Dashboard";
 import CategoryProduct from "../../pages/Home/CategoryProduct/CategoryProduct";
@@ -40,7 +41,13 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivateRouter>
+            <AdminRoute>
+              <Dashboard />
+            </AdminRoute>
+          </PrivateRouter>
+        ),
       },
     ],
   },

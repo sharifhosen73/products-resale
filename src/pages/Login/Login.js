@@ -23,8 +23,8 @@ const Login = () => {
         console.log(user);
 
         toast.success("Successfully Login");
-        navigate(from);
-        // getUserToken(user.email);
+
+        getUserToken(user.email);
       })
       .catch((error) => {});
   };
@@ -36,6 +36,17 @@ const Login = () => {
         console.log(user);
       })
       .then((error) => console.error(error));
+  };
+
+  const getUserToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate(from, { replace: true });
+        }
+      });
   };
 
   return (
@@ -75,7 +86,7 @@ const Login = () => {
       </form>
       <p>
         New User
-        <Link to="/login" className="text-primary font-semibold pl-1">
+        <Link to="/signup" className="text-primary font-semibold pl-1">
           Create Account
         </Link>
       </p>

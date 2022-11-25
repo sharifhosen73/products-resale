@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ const googleProvider = new GoogleAuthProvider();
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
   const { createUser, updateUser, googleLogin } = useContext(AuthContext);
-  const [createUserEmail, setCreateUserEmail] = useState("");
+
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
@@ -19,7 +19,7 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success("Successfully Sign Up");
-        navigate("/");
+        getUserToken(data.email);
 
         const userInfo = {
           displayName: data.name,
@@ -32,6 +32,17 @@ const SignUp = () => {
       })
       .then((error) => {
         console.log(error);
+      });
+  };
+
+  const getUserToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate("/");
+        }
       });
   };
 
@@ -54,9 +65,7 @@ const SignUp = () => {
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => {
-        setCreateUserEmail(email);
-      });
+      .then((data) => {});
   };
 
   return (
