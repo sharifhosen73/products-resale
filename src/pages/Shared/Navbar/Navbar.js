@@ -1,10 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   console.log("user", user);
+
+  const { data: users = [] } = useQuery({
+    queryKey: ["users"],
+    queryFn: () =>
+      fetch(`http://localhost:5000/users/${user?.email}`).then((res) =>
+        res.json()
+      ),
+  });
 
   const handleLogOut = () => {
     logout().then().catch();
@@ -18,16 +27,22 @@ const Navbar = () => {
       <li>
         <Link to="">About</Link>
       </li>
+      {users?.role && <Link to="/dashboard">Dashboard</Link>}
       {user?.email ? (
         <>
+          <li>
+            <Link to="createseller">Create Seller</Link>
+          </li>
           <button onClick={handleLogOut} className="btn ">
             Log Out
           </button>
         </>
       ) : (
-        <li>
-          <Link to="login">Login</Link>
-        </li>
+        <>
+          <li>
+            <Link to="login">Login</Link>
+          </li>
+        </>
       )}
     </>,
   ];

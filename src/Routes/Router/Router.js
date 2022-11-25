@@ -7,6 +7,7 @@ import Home from "../../pages/Home/Home/Home";
 import SingleProductDetails from "../../pages/Home/SingleProductDetails/SingleProductDetails";
 import Login from "../../pages/Login/Login";
 import ProductsCard from "../../pages/ProductsCard/ProductsCard";
+import SellerId from "../../pages/SellerId/SellerId";
 import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRouter from "../../PrivateRouter/PrivateRouter";
 
@@ -38,6 +39,14 @@ export const router = createBrowserRouter([
         element: <CategoryProduct />,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/categories/${params.id}`),
+      },
+      {
+        path: "createseller",
+        element: (
+          <PrivateRouter>
+            <SellerId />
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard",
