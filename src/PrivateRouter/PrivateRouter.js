@@ -4,14 +4,14 @@ import { AuthContext } from "../contexts/AuthProvider";
 import Loader from "../pages/Shared/Loader/Loader";
 
 const PrivateRouter = ({ children }) => {
-  const { users, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const location = useLocation();
 
   if (loading) {
     return <Loader />;
   }
 
-  if (users) {
+  if (user) {
     return children;
   }
 

@@ -15,6 +15,7 @@ const SingleProductDetails = () => {
     location,
     brand,
   } = product;
+  console.log("sharif", product);
   return (
     <div className="w-4/5 mx-auto my-10">
       <img src={image_url} alt="Shoes" className="rounded-xl h-96 w-full" />
