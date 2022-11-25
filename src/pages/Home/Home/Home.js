@@ -4,6 +4,7 @@ import SideHeader from "../../Shared/SideHeader/SideHeader";
 import AboutProduct from "../AboutProduct/AboutProduct";
 import Contact from "../Contact/Contact";
 import MainBanner from "../MainBanner/MainBanner";
+import ShowComment from "../ShowComment/ShowComment";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         </div>
       </div>
       <AboutProduct />
+      <ShowComment />
       <Contact />
     </div>
   );

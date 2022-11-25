@@ -16,7 +16,19 @@ const Contact = () => {
       email,
       message,
     };
-    console.log(comment);
+
+    fetch("http://localhost:5000/comment", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        form.reset();
+      });
   };
 
   return (
