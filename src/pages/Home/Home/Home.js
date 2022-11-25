@@ -2,6 +2,7 @@ import React from "react";
 import ProductsCard from "../../ProductsCard/ProductsCard";
 import SideHeader from "../../Shared/SideHeader/SideHeader";
 import AboutProduct from "../AboutProduct/AboutProduct";
+import Contact from "../Contact/Contact";
 import MainBanner from "../MainBanner/MainBanner";
 
 const Home = () => {
@@ -14,9 +15,10 @@ const Home = () => {
         </div>
         <div className="w-4/5">
           <ProductsCard />
-          <AboutProduct />
         </div>
       </div>
+      <AboutProduct />
+      <Contact />
     </div>
   );
 };
