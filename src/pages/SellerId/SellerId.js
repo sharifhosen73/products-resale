@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { toast } from "react-hot-toast";
 
 const SellerId = () => {
   const { user } = useContext(AuthContext);
@@ -23,7 +24,17 @@ const SellerId = () => {
       select,
       checkbox,
     };
-    console.log("seller", seller);
+    fetch("http://localhost:5000/users/seller", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(seller),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast.success("Successfully Seller Added");
+      });
   };
 
   return (
