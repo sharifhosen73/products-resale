@@ -1,23 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-hot-toast";
 
 const MySeller = () => {
-  const [sellers, setSellers] = useState([]);
+  const { data: sellers = [] } = useQuery({
+    queryKey: ["sellers"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/users/seller");
+      const data = await res.json();
+      return data;
+    },
+  });
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users/seller")
+  const handleMakeSeller = (id) => {
+    fetch(`http://localhost:5000/users/seller/${id}`, {
+      method: "put",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setSellers(data);
+        if (data.modifiedCount) {
+          toast.success("Added Admin Success");
+        }
       });
-  }, []);
+  };
 
   console.log("sellers", sellers);
 
   return (
-    <div>
-      <h1 className="text-5xl">Seller</h1>
+    <div className="mx-10">
       <div className="overflow-x-auto">
-        <h1 className="text-5xl text-center">Create Seller</h1>
+        <h1 className="text-5xl font-semibold text-center text-primary my-5">
+          Create Seller
+        </h1>
         <table className="table w-full">
           <thead>
             <tr>
@@ -37,7 +54,7 @@ const MySeller = () => {
                 <td>
                   {seller?.role !== "admin" && (
                     <button
-                      //   onClick={() => handleMakeAdmin(seller._id)}
+                      onClick={() => handleMakeSeller(seller._id)}
                       className="btn btn-primary"
                     >
                       Make Seller

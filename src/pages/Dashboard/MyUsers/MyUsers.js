@@ -1,16 +1,12 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
+
 import { toast } from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
 
 const MyUsers = () => {
-  // users
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: () =>
-      fetch("http://localhost:5000/users").then((res) => res.json()),
-  });
+  const users = useLoaderData();
 
-  // console.log("sharif", users);
+  console.log("sharif", users);
 
   const handleMakeAdmin = (id) => {
     fetch(`http://localhost:5000/users/admin/${id}`, {
@@ -23,17 +19,18 @@ const MyUsers = () => {
       .then((data) => {
         if (data.modifiedCount) {
           toast.success("Added Admin Success");
-          refetch();
         }
       });
   };
 
   return (
-    <div>
-      <h1 className="text-5xl">My Users</h1>
+    <div className=" px-10 ">
+      <h1 className="text-5xl font-semibold text-center text-primary my-5">
+        My Users
+      </h1>
 
       <div className="overflow-x-auto">
-        <h1 className="text-5xl text-center">Create Admin</h1>
+        <h1 className="text-3xl text-center my-5">Create Admin</h1>
         <table className="table w-full">
           <thead>
             <tr>
