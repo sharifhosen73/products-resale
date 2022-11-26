@@ -1,62 +1,46 @@
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
+import React, { useEffect, useState } from "react";
 
-const MyUsers = () => {
-  // users
-  const { data: users = [], refetch } = useQuery({
-    queryKey: ["users"],
-    queryFn: () =>
-      fetch("http://localhost:5000/users").then((res) => res.json()),
-  });
+const MySeller = () => {
+  const [sellers, setSellers] = useState([]);
 
-  // console.log("sharif", users);
-
-  const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
-      method: "put",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
+  useEffect(() => {
+    fetch("http://localhost:5000/users/seller")
       .then((res) => res.json())
       .then((data) => {
-        if (data.modifiedCount) {
-          toast.success("Added Admin Success");
-          refetch();
-        }
+        setSellers(data);
       });
-  };
+  }, []);
+
+  console.log("sellers", sellers);
 
   return (
     <div>
-      <h1 className="text-5xl">My Users</h1>
-
+      <h1 className="text-5xl">Seller</h1>
       <div className="overflow-x-auto">
-        <h1 className="text-5xl text-center">Create Admin</h1>
+        <h1 className="text-5xl text-center">Create Seller</h1>
         <table className="table w-full">
           <thead>
             <tr>
               <th>Index</th>
               <th>Name</th>
               <th>Email</th>
-              <th>Make Admin</th>
+              <th>Make Seller</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, i) => (
-              <tr key={user._id}>
+            {sellers.map((seller, i) => (
+              <tr key={seller._id}>
                 <th>{i + 1}</th>
-                <td>{user.name}</td>
-                <td> {user.email} </td>
+                <td>{seller.name}</td>
+                <td> {seller.email} </td>
                 <td>
-                  {user?.role !== "admin" && (
+                  {seller?.role !== "admin" && (
                     <button
-                      onClick={() => handleMakeAdmin(user._id)}
+                      //   onClick={() => handleMakeAdmin(seller._id)}
                       className="btn btn-primary"
                     >
-                      Make Admin
+                      Make Seller
                     </button>
                   )}
                 </td>
@@ -83,10 +67,8 @@ const MyUsers = () => {
           </tbody>
         </table>
       </div>
-
-      <div></div>
     </div>
   );
 };
 
-export default MyUsers;
+export default MySeller;
