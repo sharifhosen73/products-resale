@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const SellerPostCreate = () => {
@@ -22,18 +23,34 @@ const SellerPostCreate = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
+        console.log(imgData);
         if (imgData.success) {
           const createProduct = {
-            name: user?.user?.displayName,
+            seller_name: user?.user?.displayName,
             email: user?.user?.email,
-            productName: data.productName,
-            sellPrice: data.sellPrice,
-            originalPrice: data.originalPrice,
-            brandName: data.brandName,
+            name: data.name,
+            resale_price: data.resale_price,
+            original_price: data.original_price,
+            brand: data.brand,
             details: data.details,
-            image: imgData.data.url,
+            used: data.used,
+            image_url: imgData.data.url,
           };
-          console.log(createProduct);
+
+          fetch("http://localhost:5000/products", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify(createProduct),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success("Successfully product added");
+              // navigate('/dashboard/managedoctors')
+            });
         }
       });
   };
@@ -49,7 +66,7 @@ const SellerPostCreate = () => {
           <input
             type="name"
             defaultValue={user?.user?.displayName}
-            {...register("name")}
+            {...register("seller_name")}
             placeholder="name"
             className="input input-bordered"
           />
@@ -74,7 +91,7 @@ const SellerPostCreate = () => {
           </label>
           <input
             type="type"
-            {...register("productName")}
+            {...register("name")}
             placeholder="Product Name"
             className="input input-bordered"
           />
@@ -86,7 +103,7 @@ const SellerPostCreate = () => {
           </label>
           <input
             type="text"
-            {...register("sellPrice")}
+            {...register("resale_price")}
             placeholder="Sell Price"
             className="input input-bordered"
           />
@@ -98,7 +115,7 @@ const SellerPostCreate = () => {
           </label>
           <input
             type="type"
-            {...register("originalPrice")}
+            {...register("original_price")}
             placeholder="Original Price"
             className="input input-bordered"
           />
@@ -110,7 +127,7 @@ const SellerPostCreate = () => {
           </label>
           <input
             type="type"
-            {...register("brandName")}
+            {...register("brand")}
             placeholder="Brand Name"
             className="input input-bordered"
           />
@@ -124,6 +141,18 @@ const SellerPostCreate = () => {
             type="type"
             {...register("details")}
             placeholder="Details"
+            className="input input-bordered"
+          />
+        </div>
+
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Used</span>
+          </label>
+          <input
+            type="type"
+            {...register("used")}
+            placeholder="Used"
             className="input input-bordered"
           />
         </div>

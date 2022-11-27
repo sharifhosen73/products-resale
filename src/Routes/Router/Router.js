@@ -80,10 +80,6 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "/dashboard/seller",
-            element: <SellerDashboard />,
-          },
-          {
-            path: "/dashboard/seller/post",
             element: <SellerPostCreate />,
           },
         ],
