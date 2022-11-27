@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const SellerLayout = () => {
   return (
@@ -9,6 +9,9 @@ const SellerLayout = () => {
           <h1 className="text-xl text-primary text-center my-10">
             My Dashboard
           </h1>
+          <li>
+            <Link to="/dashboard/seller/my-product">My Products</Link>
+          </li>
         </div>
         <div className="w-4/5">
           <Outlet />

@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminRoute from "../../AdminRoute/AdminRoute";
+import SellerRoute from "../../AdminRoute/SellerRoute";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
 import MySeller from "../../pages/Dashboard/MySeller/MySeller";
@@ -9,8 +10,8 @@ import Home from "../../pages/Home/Home/Home";
 import SingleProductDetails from "../../pages/Home/SingleProductDetails/SingleProductDetails";
 import Login from "../../pages/Login/Login";
 import ProductsCard from "../../pages/ProductsCard/ProductsCard";
-import SellerDashboard from "../../pages/SellerDasboard/SellerDashboard/SellerDashboard";
 import SellerPostCreate from "../../pages/SellerDasboard/SellerPostCreate/SellerPostCreate";
+import ShowSellerProduct from "../../pages/SellerDasboard/ShowSellerProduct/ShowSellerProduct";
 import SellerId from "../../pages/SellerId/SellerId";
 import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRouter from "../../PrivateRouter/PrivateRouter";
@@ -76,11 +77,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/seller",
-        element: <SellerLayout />,
+        element: (
+          <SellerRoute>
+            <SellerLayout />
+          </SellerRoute>
+        ),
         children: [
           {
             path: "/dashboard/seller",
             element: <SellerPostCreate />,
+          },
+          {
+            path: "/dashboard/seller/my-product",
+            element: <ShowSellerProduct />,
           },
         ],
       },

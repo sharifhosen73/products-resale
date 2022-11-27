@@ -5,7 +5,7 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 
 const SellerPostCreate = () => {
   const { register, handleSubmit } = useForm();
-  const user = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
