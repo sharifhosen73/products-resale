@@ -9,9 +9,12 @@ import Home from "../../pages/Home/Home/Home";
 import SingleProductDetails from "../../pages/Home/SingleProductDetails/SingleProductDetails";
 import Login from "../../pages/Login/Login";
 import ProductsCard from "../../pages/ProductsCard/ProductsCard";
+import SellerDashboard from "../../pages/SellerDasboard/SellerDashboard/SellerDashboard";
+import SellerPostCreate from "../../pages/SellerDasboard/SellerPostCreate/SellerPostCreate";
 import SellerId from "../../pages/SellerId/SellerId";
 import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRouter from "../../PrivateRouter/PrivateRouter";
+import SellerLayout from "./../../Layout/SellerLayout";
 
 export const router = createBrowserRouter([
   {
@@ -66,8 +69,22 @@ export const router = createBrowserRouter([
             loader: () => fetch("http://localhost:5000/users"),
           },
           {
-            path: "/dashboard/seller",
+            path: "/dashboard/sellers",
             element: <MySeller />,
+          },
+        ],
+      },
+      {
+        path: "/dashboard/seller",
+        element: <SellerLayout />,
+        children: [
+          {
+            path: "/dashboard/seller",
+            element: <SellerDashboard />,
+          },
+          {
+            path: "/dashboard/seller/post",
+            element: <SellerPostCreate />,
           },
         ],
       },
