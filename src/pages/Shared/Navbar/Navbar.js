@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -20,11 +19,20 @@ const Navbar = () => {
     fetch(`http://localhost:5000/users/oneseller?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setSellers(data);
       });
   }, [user?.email]);
 
-  console.log("Single seller", sellers[0]?.role);
+  // .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("data", data);
+  //       setSellers(data);
+  //     });
+
+  // console.log("email", user?.email);
+
+  console.log("Single seller", sellers.role);
 
   const handleLogOut = () => {
     logout().then().catch();
@@ -41,7 +49,7 @@ const Navbar = () => {
 
       {user?.email ? (
         <>
-          {sellers[0]?.role === "seller" ? (
+          {sellers?.role === "seller" ? (
             <li>
               <Link to="/dashboard/seller">Dashboard</Link>
             </li>

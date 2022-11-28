@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
+import Loader from "../../Shared/Loader/Loader";
 import SingleSellerProduct from "./SingleSellerProduct";
 
 const ShowSellerProduct = () => {
   const [sellerProducts, setSellerProducts] = useState([]);
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   console.log("sellerProducts", sellerProducts);
 
   useEffect(() => {
@@ -16,6 +17,10 @@ const ShowSellerProduct = () => {
         setSellerProducts(data);
       });
   }, [user?.email]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

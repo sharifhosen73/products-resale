@@ -1,8 +1,8 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
-const SingleSellerProduct = (product) => {
+const SingleSellerProduct = ({ product }) => {
   const {
     _id,
     email,
@@ -14,8 +14,27 @@ const SingleSellerProduct = (product) => {
     brand,
     details,
     image_url,
-  } = product?.product;
-  console.log("product", product?.product);
+  } = product;
+
+  console.log("product", product);
+
+  const handleUpdate = (data) => {
+    console.log("Simple Data", data);
+  };
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div>
       <div className="border rounded-lg  bg-base-100 shadow-xl">
@@ -35,8 +54,21 @@ const SingleSellerProduct = (product) => {
             <Link to={`/products/${_id}`} className="btn btn-primary">
               Details
             </Link>
-            <button className="btn btn-outline btn-accent">Update</button>
-            <button className="btn btn-outline btn-accent">Delete</button>
+
+            <Link
+              to="/dashboard/seller"
+              //   onClick={() => handleUpdate(product?.product)}
+              className="btn btn-outline btn-accent"
+            >
+              Update
+            </Link>
+
+            <button
+              onClick={() => handleDelete(_id)}
+              className="btn btn-outline btn-accent"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>

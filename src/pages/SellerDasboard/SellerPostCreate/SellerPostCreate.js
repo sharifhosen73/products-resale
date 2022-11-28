@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
-const SellerPostCreate = () => {
+const SellerPostCreate = ({ updateProduct }) => {
   const { register, handleSubmit } = useForm();
   const { user } = useContext(AuthContext);
+
+  console.log("handleUpdate", updateProduct);
 
   const imageHostKey = process.env.REACT_APP_imgbb_key;
 
