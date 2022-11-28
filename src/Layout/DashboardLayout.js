@@ -9,6 +9,10 @@ const DashboardLayout = () => {
           <h1 className="text-xl text-primary text-center my-10">
             My Dashboard
           </h1>
+          <Link className="text-xl ml-10 pb-3" to="/dashboard">
+            Products
+          </Link>{" "}
+          <br />
           <Link className="text-xl ml-10 pb-3" to="/dashboard/users">
             User
           </Link>{" "}

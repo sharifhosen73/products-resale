@@ -24,7 +24,7 @@ const SellerId = () => {
       select,
       checkbox,
     };
-    fetch("http://localhost:5000/users/seller", {
+    fetch("https://resale-bike-server.vercel.app/users/seller", {
       method: "post",
       headers: {
         "content-type": "application/json",

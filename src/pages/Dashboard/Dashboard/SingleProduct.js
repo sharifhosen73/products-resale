@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaCheck } from "react-icons/fa";
 
-const ProductItem = ({ product }) => {
+const SingleProduct = ({ product }) => {
   const {
     _id,
-    name,
     email,
-    image_url,
+    seller_name,
+    name,
     original_price,
     resale_price,
-    details,
     used,
-    seller_name,
+    brand,
+    details,
+    image_url,
   } = product;
   return (
     <div className="border rounded-lg  bg-base-100 shadow-xl">
@@ -22,24 +22,26 @@ const ProductItem = ({ product }) => {
       <div className="card-body pl-8">
         <h2 className="card-title">{name}</h2>
         <p className="text-xl font-semibold">Price: ${original_price}</p>
-        <p className="text-xl font-semibold">Price: ${resale_price}</p>
+        <p className="text-xl font-semibold">Resale Price: ${resale_price}</p>
         <p className="text-justify">Used: {used}</p>
-        <div
-          className="flex items-center 
-        "
-        >
-          <span className="text-justify">Seller Name: {seller_name}</span>
-          <span className="px-4 text-primary">{email && <FaCheck />}</span>
-        </div>
+        <p className="text-justify">Brand: {brand}</p>
+        <p className="text-justify">Seller Name: {seller_name}</p>
+        <p className="text-justify">Seller Email: {email}</p>
         <p className="text-justify">{details}</p>
         <div className="card-actions bottom-0 left-0">
           <Link to={`/products/${_id}`} className="btn btn-primary">
             Details
           </Link>
+
+          <Link to="/dashboard/seller" className="btn btn-outline btn-accent">
+            Update
+          </Link>
+
+          <button className="btn btn-outline btn-accent">Delete</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default ProductItem;
+export default SingleProduct;

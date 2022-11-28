@@ -5,7 +5,9 @@ const ShowComment = () => {
   const { data: comments = [] } = useQuery({
     queryKey: ["comments"],
     queryFn: () =>
-      fetch("http://localhost:5000/comment").then((res) => res.json()),
+      fetch("https://resale-bike-server.vercel.app/comment").then((res) =>
+        res.json()
+      ),
   });
 
   return (

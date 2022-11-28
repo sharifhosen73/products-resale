@@ -6,6 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthProvider from "./contexts/AuthProvider";
 
+import "../node_modules/@fortawesome/fontawesome-svg-core/styles.css";
+
 // Create a client
 const queryClient = new QueryClient();
 

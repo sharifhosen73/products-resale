@@ -1,14 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import MyUsers from "../MyUsers/MyUsers";
+import SingleProduct from "./SingleProduct";
 
 const Dashboard = () => {
+  const { data: products = [] } = useQuery({
+    queryKey: ["products"],
+    queryFn: () =>
+      fetch(`https://resale-bike-server.vercel.app/products`).then((res) =>
+        res.json()
+      ),
+  });
+
   return (
-    <div className="flex my-10">
-      <div className="w-1/5 bg-gray-100">
+    <div className=" my-10">
+      <div className=" bg-gray-100">
         <h1 className="text-xl">My Dashboard</h1>
       </div>
-      <div className="w-4/5">
-        <MyUsers />
+      <div className=" grid gap-8 grid-cols-1 lg:grid-cols-2">
+        {products.map((product) => (
+          <SingleProduct key={product._id} product={product} />
+        ))}
       </div>
     </div>
   );

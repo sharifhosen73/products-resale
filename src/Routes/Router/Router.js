@@ -17,6 +17,7 @@ import SellerId from "../../pages/SellerId/SellerId";
 import SignUp from "../../pages/SignUp/SignUp";
 import PrivateRouter from "../../PrivateRouter/PrivateRouter";
 import SellerLayout from "./../../Layout/SellerLayout";
+import Dashboard from "./../../pages/Dashboard/Dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -39,13 +40,15 @@ export const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(`https://resale-bike-server.vercel.app/products/${params.id}`),
       },
       {
         path: "/product/category/:id",
         element: <CategoryProduct />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/categories/${params.id}`),
+          fetch(
+            `https://resale-bike-server.vercel.app/categories/${params.id}`
+          ),
       },
       {
         path: "createseller",
@@ -66,9 +69,13 @@ export const router = createBrowserRouter([
         ),
         children: [
           {
+            path: "/dashboard",
+            element: <Dashboard />,
+          },
+          {
             path: "/dashboard/users",
             element: <MyUsers />,
-            loader: () => fetch("http://localhost:5000/users"),
+            loader: () => fetch("https://resale-bike-server.vercel.app/users"),
           },
           {
             path: "/dashboard/sellers",

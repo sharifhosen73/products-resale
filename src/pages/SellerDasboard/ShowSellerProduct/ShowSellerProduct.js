@@ -10,7 +10,9 @@ const ShowSellerProduct = () => {
   console.log("sellerProducts", sellerProducts);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/products/seller?email=${user?.email}`)
+    fetch(
+      `https://resale-bike-server.vercel.app/products/seller?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

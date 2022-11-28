@@ -39,7 +39,7 @@ const SellerPostCreate = ({ updateProduct }) => {
             image_url: imgData.data.url,
           };
 
-          fetch("http://localhost:5000/products", {
+          fetch("https://resale-bike-server.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

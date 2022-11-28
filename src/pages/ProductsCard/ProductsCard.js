@@ -5,7 +5,7 @@ import axios from "axios";
 const ProductsCard = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/products").then((res) => {
+    axios.get("https://resale-bike-server.vercel.app/products").then((res) => {
       setProducts(res.data);
     });
   }, []);

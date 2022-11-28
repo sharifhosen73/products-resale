@@ -9,15 +9,17 @@ const Navbar = () => {
   const { data: admin } = useQuery({
     queryKey: ["admin", user?.email],
     queryFn: () =>
-      fetch(`http://localhost:5000/users/oneadmin?email=${user?.email}`).then(
-        (res) => res.json()
-      ),
+      fetch(
+        `https://resale-bike-server.vercel.app/users/oneadmin?email=${user?.email}`
+      ).then((res) => res.json()),
   });
 
   const [sellers, setSellers] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/oneseller?email=${user?.email}`)
+    fetch(
+      `https://resale-bike-server.vercel.app/users/oneseller?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

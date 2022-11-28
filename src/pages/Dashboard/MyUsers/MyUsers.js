@@ -9,7 +9,7 @@ const MyUsers = () => {
   console.log("sharif", users);
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://resale-bike-server.vercel.app/users/admin/${id}`, {
       method: "put",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

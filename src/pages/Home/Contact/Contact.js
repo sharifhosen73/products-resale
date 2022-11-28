@@ -17,7 +17,7 @@ const Contact = () => {
       message,
     };
 
-    fetch("http://localhost:5000/comment", {
+    fetch("https://resale-bike-server.vercel.app/comment", {
       method: "POST",
       headers: {
         "content-type": "application/json",

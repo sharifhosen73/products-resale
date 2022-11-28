@@ -6,7 +6,9 @@ const SideHeader = () => {
   const { data: categories = [] } = useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      fetch("http://localhost:5000/categories").then((res) => res.json()),
+      fetch("https://resale-bike-server.vercel.app/categories").then((res) =>
+        res.json()
+      ),
   });
 
   return (

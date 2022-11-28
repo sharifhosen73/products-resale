@@ -6,14 +6,16 @@ const MySeller = () => {
   const { data: sellers = [] } = useQuery({
     queryKey: ["sellers"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/users/seller");
+      const res = await fetch(
+        "https://resale-bike-server.vercel.app/users/seller"
+      );
       const data = await res.json();
       return data;
     },
   });
 
   const handleMakeSeller = (id) => {
-    fetch(`http://localhost:5000/users/seller/${id}`, {
+    fetch(`https://resale-bike-server.vercel.app/users/seller/${id}`, {
       method: "put",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
