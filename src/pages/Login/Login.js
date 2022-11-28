@@ -23,6 +23,7 @@ const Login = () => {
         console.log(user);
 
         toast.success("Successfully Login");
+        navigate(from, { replace: true });
 
         getUserToken(user.email);
       })
@@ -45,7 +46,6 @@ const Login = () => {
         if (data.accessToken) {
           localStorage.setItem("accessToken", data.accessToken);
         }
-        navigate(from, { replace: true });
       });
   };
 
