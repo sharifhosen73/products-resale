@@ -20,18 +20,22 @@ const SingleSellerProduct = ({ product }) => {
   //     console.log("Simple Data", data);
   //   };
 
-  //   const handleDelete = (id) => {
-  //     fetch(`https://resale-bike-server.vercel.app/products/${id}`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log(data);
-  //       });
-  //   };
+  const handleDelete = (id) => {
+    console.log(id);
+    // fetch(`https://resale-bike-server.vercel.app/products/${id}`, {
+    //   method: "DELETE",
+    // });
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
+
+    fetch(`https://resale-bike-server.vercel.app/products/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json()) // or res.json()
+      .then((res) => console.log(res));
+  };
 
   return (
     <div>
@@ -69,7 +73,7 @@ const SingleSellerProduct = ({ product }) => {
             </Link>
 
             <button
-              //   onClick={() => handleDelete(_id)}
+              onClick={() => handleDelete(_id)}
               className="btn btn-outline btn-accent"
             >
               Delete
