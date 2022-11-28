@@ -9,6 +9,7 @@ import CategoryProduct from "../../pages/Home/CategoryProduct/CategoryProduct";
 import Home from "../../pages/Home/Home/Home";
 import SingleProductDetails from "../../pages/Home/SingleProductDetails/SingleProductDetails";
 import Login from "../../pages/Login/Login";
+import NotFound from "../../pages/NotFound/NotFound";
 import ProductsCard from "../../pages/ProductsCard/ProductsCard";
 import SellerPostCreate from "../../pages/SellerDasboard/SellerPostCreate/SellerPostCreate";
 import ShowSellerProduct from "../../pages/SellerDasboard/ShowSellerProduct/ShowSellerProduct";
@@ -102,5 +103,9 @@ export const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);

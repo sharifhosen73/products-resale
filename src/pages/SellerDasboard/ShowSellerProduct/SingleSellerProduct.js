@@ -1,5 +1,4 @@
 import React from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 const SingleSellerProduct = ({ product }) => {
@@ -18,22 +17,22 @@ const SingleSellerProduct = ({ product }) => {
 
   console.log("product", product);
 
-  const handleUpdate = (data) => {
-    console.log("Simple Data", data);
-  };
+  //   const handleUpdate = (data) => {
+  //     console.log("Simple Data", data);
+  //   };
 
-  const handleDelete = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
-  };
+  //   const handleDelete = (id) => {
+  //     fetch(`http://localhost:5000/products/${id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         authorization: `bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         console.log(data);
+  //       });
+  //   };
 
   return (
     <div>
@@ -64,7 +63,7 @@ const SingleSellerProduct = ({ product }) => {
             </Link>
 
             <button
-              onClick={() => handleDelete(_id)}
+              //   onClick={() => handleDelete(_id)}
               className="btn btn-outline btn-accent"
             >
               Delete

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider";
@@ -5,13 +6,13 @@ import { AuthContext } from "../../../contexts/AuthProvider";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
-  // const { data: sellers } = useQuery({
-  //   queryKey: ["sellers"],
-  //   queryFn: () =>
-  //     fetch(`http://localhost:5000/users/oneseller?email=${user?.email}`).then(
-  //       (res) => res.json()
-  //     ),
-  // });
+  const { data: admin } = useQuery({
+    queryKey: ["admin", user?.email],
+    queryFn: () =>
+      fetch(`http://localhost:5000/users/oneadmin?email=${user?.email}`).then(
+        (res) => res.json()
+      ),
+  });
 
   const [sellers, setSellers] = useState({});
 
@@ -23,14 +24,6 @@ const Navbar = () => {
         setSellers(data);
       });
   }, [user?.email]);
-
-  // .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log("data", data);
-  //       setSellers(data);
-  //     });
-
-  // console.log("email", user?.email);
 
   console.log("Single seller", sellers.role);
 
@@ -54,9 +47,17 @@ const Navbar = () => {
               <Link to="/dashboard/seller">Dashboard</Link>
             </li>
           ) : (
-            <li>
-              <Link to="createseller">Create Seller</Link>
-            </li>
+            <>
+              {admin?.role === "admin" ? (
+                <li>
+                  <Link to="/dashboard">Dashboard</Link>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/createseller">Create Seller</Link>
+                </li>
+              )}
+            </>
           )}
 
           <button onClick={handleLogOut} className="btn ">
